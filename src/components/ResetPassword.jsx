@@ -1,67 +1,60 @@
 import { useState } from 'react'
 
-export default function Login({
-  switchToSignup,
-  switchToForgotPassword,
-  switchToDashboard,
-}) {
-  const [email, setEmail] = useState('')
+export default function ResetPassword({ switchToLogin }) {
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
-    alert(`Logged in: ${email}`)
+    if (password !== confirmPassword) {
+      alert('Passwords do not match')
+      return
+    }
 
-    // Abhi dummy login hai.
-    // Backend authentication ke baad dashboard open hoga.
-    switchToDashboard()
+    console.log('Password reset successfully')
+
+    // Backend reset-password API yahan lagegi.
+
+    alert('Password reset successfully!')
+
+    switchToLogin()
   }
 
   return (
     <div style={styles.card}>
-      <h2>Login</h2>
+      <h2>Reset Password</h2>
 
-      <form onSubmit={handleLogin} style={styles.form}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={styles.input}
-        />
-
+      <form onSubmit={handleSubmit} style={styles.form}>
         <input
           type="password"
-          placeholder="Password"
+          placeholder="New Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
           style={styles.input}
         />
 
+        <input
+          type="password"
+          placeholder="Confirm New Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          style={styles.input}
+        />
+
         <button type="submit" style={styles.button}>
-          Login
+          Reset Password
         </button>
       </form>
 
       <p>
         <span
-          onClick={switchToForgotPassword}
+          onClick={switchToLogin}
           style={styles.link}
         >
-          Forgot Password?
-        </span>
-      </p>
-
-      <p>
-        New user?{' '}
-        <span
-          onClick={switchToSignup}
-          style={styles.link}
-        >
-          Sign Up
+          Back to Login
         </span>
       </p>
     </div>
@@ -92,7 +85,7 @@ const styles = {
 
   button: {
     padding: '10px',
-    backgroundColor: '#007bff',
+    backgroundColor: '#dc3545',
     color: 'white',
     border: 'none',
     borderRadius: '4px',

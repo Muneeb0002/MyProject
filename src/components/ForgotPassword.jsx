@@ -1,67 +1,52 @@
 import { useState } from 'react'
 
-export default function Login({
-  switchToSignup,
-  switchToForgotPassword,
-  switchToDashboard,
+export default function ForgotPassword({
+  switchToLogin,
+  switchToReset,
 }) {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
-    alert(`Logged in: ${email}`)
+    console.log('Reset link requested for:', email)
 
-    // Abhi dummy login hai.
-    // Backend authentication ke baad dashboard open hoga.
-    switchToDashboard()
+    // Backend forgot-password API yahan lagegi.
+
+    alert('Reset link sent!')
+
+    switchToReset()
   }
 
   return (
     <div style={styles.card}>
-      <h2>Login</h2>
+      <h2>Forgot Password</h2>
 
-      <form onSubmit={handleLogin} style={styles.form}>
+      <p>
+        Enter your email to reset your password.
+      </p>
+
+      <form onSubmit={handleSubmit} style={styles.form}>
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
           style={styles.input}
         />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={styles.input}
-        />
-
         <button type="submit" style={styles.button}>
-          Login
+          Send Reset Link
         </button>
       </form>
 
       <p>
         <span
-          onClick={switchToForgotPassword}
+          onClick={switchToLogin}
           style={styles.link}
         >
-          Forgot Password?
-        </span>
-      </p>
-
-      <p>
-        New user?{' '}
-        <span
-          onClick={switchToSignup}
-          style={styles.link}
-        >
-          Sign Up
+          Back to Login
         </span>
       </p>
     </div>
