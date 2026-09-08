@@ -1,8 +1,13 @@
 import { useState } from 'react'
+
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import ForgotPassword from '../components/ForgotPassword'
 import ResetPassword from '../components/ResetPassword'
+
+import Dashboard from './Dashboard'
+import Profile from './Profile'
+import Jobs from './Jobs'
 
 export default function AuthPage() {
   const [currentScreen, setCurrentScreen] = useState('login')
@@ -17,38 +22,76 @@ export default function AuthPage() {
         backgroundColor: '#f5f5f5',
       }}
     >
+
       {currentScreen === 'login' && (
         <Login
           switchToSignup={() => setCurrentScreen('signup')}
-          switchToForgotPassword={() => setCurrentScreen('forgotPassword')}
-          switchToDashboard={() => setCurrentScreen('dashboard')}
+          switchToForgotPassword={() =>
+            setCurrentScreen('forgotPassword')
+          }
+          switchToDashboard={() =>
+            setCurrentScreen('dashboard')
+          }
         />
       )}
 
       {currentScreen === 'signup' && (
         <Signup
-          switchToLogin={() => setCurrentScreen('login')}
+          switchToLogin={() =>
+            setCurrentScreen('login')
+          }
         />
       )}
 
       {currentScreen === 'forgotPassword' && (
         <ForgotPassword
-          switchToLogin={() => setCurrentScreen('login')}
-          switchToReset={() => setCurrentScreen('resetPassword')}
+          switchToLogin={() =>
+            setCurrentScreen('login')
+          }
+          switchToReset={() =>
+            setCurrentScreen('resetPassword')
+          }
         />
       )}
 
       {currentScreen === 'resetPassword' && (
         <ResetPassword
-          switchToLogin={() => setCurrentScreen('login')}
+          switchToLogin={() =>
+            setCurrentScreen('login')
+          }
         />
       )}
 
       {currentScreen === 'dashboard' && (
         <Dashboard
-          switchToLogin={() => setCurrentScreen('login')}
+          switchToLogin={() =>
+            setCurrentScreen('login')
+          }
+          switchToJobs={() =>
+            setCurrentScreen('jobs')
+          }
+          switchToProfile={() =>
+            setCurrentScreen('profile')
+          }
         />
       )}
+
+      {currentScreen === 'jobs' && (
+        <Jobs
+          switchToDashboard={() =>
+            setCurrentScreen('dashboard')
+          }
+        />
+      )}
+
+      {currentScreen === 'profile' && (
+        <Profile
+          switchToDashboard={() =>
+            setCurrentScreen('dashboard')
+          }
+        />
+      )}
+
     </div>
   )
 }
